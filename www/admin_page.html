@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="msapplication-tap-highlight" content="no" />
+    <title>COUNTY APP</title>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="stylesheet" href="css/ratchet.min.css">
+    <link rel="stylesheet" href="css/ratchet-theme-android.min.css">
+    <link rel="stylesheet" href="css/app.css">
+  </head>
+  <body>
+    <header class="bar bar-nav bar-texture">
+      <a class="icon icon-gear pull-right" href="#navPopover"></a>
+      <a class="icon icon-compose pull-right" href="#addupdateModal"></a>
+      <h1 class="title">COUNTY APP</h1>
+    </header>
+    <div class="bar bar-standard bar-header-secondary">
+      <!--segmented control-->
+      <div class="segmented-control">
+        <a class="control-item" href="#item2mobile">
+          Public Updates
+        </a>
+        <a class="control-item" href="#item3mobile">
+          Chats
+        </a>
+      </div>
+    </div>
+  <!--begin main content-->
+    <div class="content content-padded">
+      <!--segmented content-->
+        <div class="content-padded">
+          <span id="item2mobile" class="control-content active">
+             <ul id="public_updates" class="table-view"> 
+             </ul>
+          </span>
+          <span id="item3mobile" class="control-content">
+            <ul id="chats" class="table-view">
+            </ul>
+          </span>
+        </div>
+    </div><!-- /.content -->
+      <!--footer-->
+         <!-- Popover -->
+        <div id="navPopover" class="popover">
+            <ul class="table-view">
+              <li class="table-view-cell">
+                Settings
+              </li>
+              <li class="table-view-cell">
+                Account
+              </li>
+              <li class="table-view-cell">
+                <a class="logout">Logout</a>
+              </li>
+            </ul>
+        </div>
+        <!-- Add Update modal -->
+        <div id="addupdateModal" class="modal">
+          <header class="bar bar-nav bar-texture">
+          <a class="icon icon-close pull-right" href="#addupdateModal"></a>
+          <h1 class="title">New Update</h1>
+          </header>
+          <div class="content">
+            <form id="add_update" class="input-group">
+              <label></label>
+              <input type="hidden" class="hide"  name="recipient" value="public">     
+              <input type="text" name="t_subject" placeholder="Subject" required>
+              <br/><br/>
+              <textarea name="t_description"placeholder="Description" required></textarea>
+              <br/><br/> 
+              <p class="toast"></p>
+              <button class="btn btn-positive btn-block ">Send</button>
+            </form>
+          </div>
+          <!--footer-->
+        </div>
+            
+    <!-- /.modal -->
+    <script type="text/javascript" src="cordova.js" ></script>
+    <script type="text/javascript" src="js/libraries/ratchet.min.js" ></script>
+    <script type="text/javascript" src="js/libraries/jquery.min.js" ></script>
+    <script type="text/javascript" src="js/libraries/validation.js"></script>
+    <script type="text/javascript" src="js/libraries/underscore-min.js"></script>
+    <script type="text/javascript" src="js/libraries/storageapi.js"></script> 
+    <script type="text/javascript" src="js/libraries/moment.js"></script> 
+    <script type="text/javascript" src="js/libraries/livestamp.min.js"></script>
+    <script type="text/javascript" src="js/admin.js" ></script>
+    
+    <!--templates-->
+    <!-- content template-->
+    <script type="text/template" id="updates">
+    <% if(rc.t_error){ %>
+      <li class="table-view-cell media">
+       <div class="media-body">
+              <p class="center-text"><%= rc.t_error %> </p>
+       </div>
+      </li>
+     <% } else{ _.each(rc.topic, function(list){ %>
+        <li class="table-view-cell media" >
+          <a class="navigate-right" id=<%= list.topic_id %> >
+            <div class="media-body">
+              <%=list.subject %>
+              <p><span data-livestamp=<%= list.time_stamp %>></span></p>
+            </div>
+          </a>
+        </li>
+       <% }); } %>
+    </script>
+    <!-- Admin chats-->
+    <script type="text/template" id="users">
+    <% if(rc.failure){ %>
+      <li class="table-view-cell">
+       <div class="media-body">
+              <p class="center-text"><%= rc.failure %> </p>
+       </div>
+      </li>
+     <% } else{ _.each(rc.user_list, function(list){ %>
+        <li class="table-view-cell media" >
+          <a class="navigate-right" id=<%= list.user_id %>>
+            <div class="media-body">
+              <%=list.first_name %>  <%=list.last_name %>
+              <p>From: <%= list.ward %> Ward.</p>
+              <p>Mobile: <%= list.phone %></p>
+            </div>
+          </a>
+        </li>
+       <% }); } %>
+    </script>
+  </body>
+</html>

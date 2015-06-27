@@ -1,0 +1,79 @@
+.slider {
+  margin-bottom: 0;
+}
+.slider img {
+  width: auto;
+  height: 150px;
+}
+.content-padded {
+  margin: 30px 15px 15px;
+}
+.minify
+{
+font-family:Lato;
+font-size:12px;
+font-weight:300;
+}
+input[type=checkbox]
+{
+border:1 solid #CCCCCC;
+width:3px;
+height:3px;
+}
+.center-text
+{
+	text-align: center;
+}
+
+.hide
+{
+	display: none;
+}
+.show
+{
+  display: block;
+}
+.error
+{
+	color: #FF6600;
+	font-size: 15px;
+	text-align: center;
+	font-family: Lato;
+}
+.success
+{
+	color: #99FF66;
+	font-size: 15px;
+	text-align: center;
+	font-family: Lato;
+}
+.toast
+{
+	background-color: #505050;
+	color: #F8F8F8;
+	font-size: 15px;
+	text-align: center;
+	font-family: Lato;
+}
+#msg
+{
+	background-color: #505050;
+	color: #F8F8F8;
+	font-size: 15px;
+	text-align: center;
+	font-family: Lato;
+}
+#loading
+{
+	background-color: #505050;
+	color: #F8F8F8;
+	font-size: 15px;
+	text-align: center;
+	font-family: Lato;
+}
+.mobad-logo
+{
+	margin:30px;
+}
+
+
