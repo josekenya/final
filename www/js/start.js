@@ -141,29 +141,32 @@ document.addEventListener('deviceready',function(){
       showPopUp();
     }, false);
     //transitions
-    $("#next").click(function(){
+    $("#next").click(function(e){
         window.plugins.nativepagetransitions.slide({
           "direction":"left",
           "duration":"400",
           "androiddelay":"20",
           "href":"auth_sign_up.html"
       });
+        e.preventDefault();
       });
-    $("#login").click(function(){
+    $("#login").click(function(e){
     window.plugins.nativepagetransitions.slide({
       "direction":"left",
       "duration":"400",
       "androiddelay":"20",
       "href":"auth_log_in.html"
     });
+    e.preventDefault();
     });
-    $("#back").click(function(){
+    $("#back").click(function(e){
       window.plugins.nativepagetransitions.slide({
       "direction":"right",
       "duration":"400",
       "androiddelay":"20",  
       "href":"index.html"
     });
+      e.preventDefault();
     });
   });
   },false);
