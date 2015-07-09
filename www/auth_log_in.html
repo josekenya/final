@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="format-detection" content="telephone=no" />
+        <meta name="msapplication-tap-highlight" content="no" />
+        <!-- WARNING: for iOS 7, remove the width=device-width and height=device-height attributes. See https://issues.apache.org/jira/browse/CB-4323 -->
+        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height" />
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black">
+        <link rel="stylesheet" href="css/ratchet.min.css">
+        <link rel="stylesheet" href="css/ratchet-theme-android.min.css">
+        <link rel="stylesheet" href="css/app.css">
+    </head>
+    <body>
+       <!--begin main content-->
+            <header class="bar bar-nav bar-texture">
+                <a class="icon icon-left-nav pull-left" id="back"></a>
+                <h1 class="title">Login</h1>
+            </header>
+            <div id="page" class="content content-padded">
+                <p class="toast"></p>
+                  <form id="login-form" class="input-group">
+                    <input type="text" name="l-user" placeholder="username" required>
+                    <br/><br/>
+                    <input type="password" name="l-passwrd" placeholder="password" required>
+                    <br/><br/>
+                    <button id="submit-login" class="btn btn-positive btn-block">Log In</button> 
+                  </form>      
+            </div><!-- /.content -->
+        <script type="text/javascript" src="cordova.js"></script>
+        <script type="text/javascript" src="js/libraries/ratchet.min.js"></script>
+        <script type="text/javascript" src="js/libraries/jquery.min.js"></script>
+        <script type="text/javascript" src="js/libraries/validation.js"></script>
+        <script type="text/javascript" src="js/libraries/underscore-min.js"></script>
+        <script type="text/javascript" src="js/libraries/storageapi.js"></script>
+        <script type="text/javascript" src="js/start.js"></script>
+    </body>
+</html>

@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="msapplication-tap-highlight" content="no" />
+    <title>COUNTY APP</title>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="stylesheet" href="css/ratchet.min.css">
+    <link rel="stylesheet" href="css/ratchet-theme-android.min.css">
+    <link rel="stylesheet" href="css/app.css">
+  </head>
+  <body>
+		<header class="bar bar-nav bar-texture">
+      <a class="icon icon-more-vertical pull-right" href="#navPopover" id="settings"></a>
+      <a id="d" class="icon icon-compose pull-right" href="#discussionModal"></a>
+      <h1 class="title">Ngumzo Kwale</h1>
+		</header>
+    <div class="bar bar-standard bar-header-secondary">
+          <div class="segmented-control">
+              <a class="control-item active" href="#item1mobile">
+               Discussions
+              </a>
+              <a class="control-item" href="#item3mobile">
+               Chats
+              </a>
+          </div>
+    </div>
+	<!--begin main content-->
+		<div class="content">
+          <span id="item1mobile" class="control-content active ">
+            <ul id="discussions" class="table-view">
+            </ul>
+          </span>
+          <span id="item3mobile" class="control-content">
+            <ul id="chat_contacts" class="table-view">
+            </ul>
+          </span>
+		</div><!-- /.content -->
+		     <!-- Popover -->
+        <div id="navPopover" class="popover">
+            <ul class="table-view">
+              <li class="table-view-cell">
+                Settings
+              </li>
+              <li class="table-view-cell">
+                Account
+              </li>
+              <li class="table-view-cell">
+               <a class="logout"> Logout</a>
+              </li>
+            </ul>
+        </div>
+				 <!-- Add Item modal -->		
+          <!--sms-->
+        <div id="discussionModal" class="modal">
+          <header class="bar bar-nav bar-texture">
+          <a class="icon icon-close pull-right" href="#discussionModal"></a>
+          <h1 class="title">New Discussion</h1>
+          </header>
+          <div class="content content-padded">
+            <form id="compose_discussion" class="input-group">
+              <label></label> 
+               <input type="hidden" name="dep_id" id="dep_id">
+              <input type="text" name="disc_title" placeholder="Subject" required>
+              <br/><br/>
+              <textarea name="disc_description"placeholder="Description" required></textarea>
+              <br/><br/> 
+              <p class="toast"></p>
+              <button class="btn btn-positive btn-block ">Send</button>
+            </form>
+          </div>  
+    <!-- /.modal -->
+    <script type="text/javascript" src="cordova.js" ></script>
+    <script type="text/javascript" src="js/libraries/ratchet.min.js" ></script>
+    <script type="text/javascript" src="js/libraries/jquery.min.js" ></script>
+    <script type="text/javascript" src="js/libraries/validation.js"></script>
+    <script type="text/javascript" src="js/libraries/underscore-min.js"></script>
+    <script type="text/javascript" src="js/libraries/storageapi.js"></script> 
+	  <script type="text/javascript" src="js/libraries/moment.js"></script> 
+	  <script type="text/javascript" src="js/libraries/livestamp.min.js"></script>
+     <script type="text/javascript" src="js/libraries/fastclick.js" ></script>
+    <script type="text/javascript" src="js/ministry.js" ></script>
+    <!--templates-->
+    <!-- all topics template-->
+    <script type="text/template" id="min_issues">
+    <% if(rc.t_error){ %>
+      <li class="table-view-cell media">
+       <div class="media-body">
+              <p id="error" class="center-text"><%= rc.t_error %> </p>
+       </div>
+      </li>
+     <% } else{ _.each(rc.discs, function(list){ %>
+        <li class="table-view-cell media" >
+          <a class="navigate-right" id=<%= list.i_id %> >
+          <img class="media-object pull-left" src="img/42x42.png">
+            <div class="media-body">
+              <label class="update"><%=list.i_title %></label>
+              <p class="time"><span data-livestamp=<%= list.time_stamp %>></span></p>
+            </div>
+          </a>
+        </li>
+       <% }); } %>
+    </script>
+    <!-- Ministry Chats-->
+    <script type="text/template" id="users">
+    <% if(rc.failure){ %>
+      <li class="table-view-cell">
+       <div class="media-body">
+              <p class="center-text"><%= rc.failure %> </p>
+       </div>
+      </li>
+     <% } else{ _.each(rc.contact_list, function(list){ %>
+        <li class="table-view-cell media" >
+          <a class="navigate-right" id=<%= list.user_id %>>
+            <img class="media-object pull-left" src="img/user.png">
+            <div class="media-body">
+              <label class="update"><%=list.first_name %>  <%=list.last_name %></label>
+              <p class="time">From: <%= list.ward %> Ward.</p>
+              <p class="time">Mobile: <%= list.phone %></p>
+            </div>
+          </a>
+        </li>
+       <% }); } %>
+    </script>
+  </body>
+</html>

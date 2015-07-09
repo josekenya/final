@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="msapplication-tap-highlight" content="no" />
+    <title>COUNTY APP</title>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="stylesheet" href="css/ratchet.min.css">
+    <link rel="stylesheet" href="css/ratchet-theme-android.min.css">
+    <link rel="stylesheet" href="css/app.css">
+  </head>
+  <body>
+		<header class="bar bar-nav bar-texture">
+      <a class="icon icon-left-nav pull-left" id="back"></a>
+      <h1 class="title">COUNTY APP</h1>
+		</header>
+    <div class="bar bar-standard bar-header-secondary">
+          <div class="segmented-control">
+              <a class="control-item active " href="#item2mobile">
+               Discussions
+              </a>
+              <a class="control-item" href="#item3mobile">
+               Chat
+              </a>
+          </div>
+    </div>
+	<!--begin main content-->
+		<div class="content ">
+          <span id="item2mobile" class="control-content active">
+            <ul id="county_discussions" class="table-view">
+            </ul>
+          </span>
+          <span id="item3mobile" class="control-content content-padded">
+            <form id="add-chat" class="input-group">
+                <textarea id="chat" placeholder="Type Message" required></textarea>    
+                <button class="btn btn-positive pull-right" id="send_chat">Send</button>
+            </form>
+            <br/><br/>
+            <ul class="table-view" id="ministry_chat">
+            </ul>
+          </span>
+		</div><!-- /.content -->  
+    <!-- /.modal -->
+    <script type="text/javascript" src="cordova.js" ></script>
+    <script type="text/javascript" src="js/libraries/ratchet.min.js" ></script>
+    <script type="text/javascript" src="js/libraries/jquery.min.js" ></script>
+    <script type="text/javascript" src="js/libraries/validation.js"></script>
+    <script type="text/javascript" src="js/libraries/underscore-min.js"></script>
+    <script type="text/javascript" src="js/libraries/storageapi.js"></script> 
+	  <script type="text/javascript" src="js/libraries/moment.js"></script> 
+	  <script type="text/javascript" src="js/libraries/livestamp.min.js"></script>
+     <script type="text/javascript" src="js/libraries/fastclick.js" ></script>
+    <script type="text/javascript" src="js/user_discussions.js" ></script>
+    <!--templates-->
+    <!-- all discussions-->
+    <script type="text/template" id="user_discussions">
+    <% if(rc.t_error){ %>
+      <li class="table-view-cell media">
+       <div class="media-body">
+              <p class="center-text"><%= rc.t_error %> </p>
+       </div>
+      </li>
+     <% } else{ _.each(rc.discs, function(list){ %>
+        <li class="table-view-cell media" >
+          <a class="navigate-right" id=<%= list.i_id %>>
+            <img class="media-object pull-left" src="img/42x42.png">
+            <div class="media-body">
+              <label class="update"><%=list.i_title %></label>
+              <p class="time"><span data-livestamp=<%= list.time_stamp %>></span></p>
+            </div>
+          </a>
+        </li>
+       <% }); } %>
+    </script>
+     <!-- private user ministry chat-->
+    <script type="text/template" id="my_chat">
+    <% if(rc.t_error){ %>
+        <p class="center-text"><%= rc.t_error %> </p>
+     <% } else{ _.each(rc.min_thread, function(list){ %>
+          <li class="table-view-cell media" >
+            <img class="media-object pull-left" src="img/user.png">
+            <div class="media-body">
+              <label class="update"><%=list.username %></label>
+              <p><%=list.response %></p>
+              <p class="time"><span data-livestamp=<%= list.time_stamp %>></span></p>
+            </div>
+          </li>
+       <%}); } %>
+    </script>
+  </body>
+</html>

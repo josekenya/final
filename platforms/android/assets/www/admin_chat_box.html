@@ -9,28 +9,27 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <link rel="stylesheet" href="css/ratchet.min.css">
+    <link rel="stylesheet" href="css/ratchet-theme-android.min.css">
     <link rel="stylesheet" href="css/app.css">
   </head>
   <body>
 		<header class="bar bar-nav bar-texture">
       <a id="back" class="icon icon-left-nav pull-left"></a>
       <h1 class="title">CHAT</h1>
+      <a  class="icon pull-right"><img src="img/camera.png" /></a>
 		</header>
+    <div class="bar bar-standard bar-header-secondary">
+       <textarea id="msg_text"class="msg_text" rows="1" col="3" placeholder="Type Message" required></textarea> 
+      <a id="send" class="icon icon-play pull-left"></a>
+    </div>
+    
 	<!--begin main content-->
-		<div class="content content-padded">
-            <br/>
-            <form id="add-item" class="input-group">
-              <textarea id="my_msg" placeholder="Type Message" required></textarea>     
-              <button class="btn btn-positive pull-right" id="send_msg">Send</button>
-            </form>
-            <br/><br/>
-			  	  <ul id="chat_thread" class="table-view">
-			       
-		        </ul>
+		<div  class="content content-padded">
+    		<div class="table-view" id="chat_thread">
+                  
+        </div>
 		</div><!-- /.content -->
-				<!--footer-->
-		     <!-- Popover -->
-				 <!-- Add Item modal -->		  
+		<!--footer-->	  
     <!-- /.modal -->
     <script type="text/javascript" src="js/libraries/ratchet.min.js" ></script>
     <script type="text/javascript" src="js/libraries/jquery.min.js" ></script>
@@ -39,7 +38,7 @@
     <script type="text/javascript" src="js/libraries/storageapi.js"></script> 
 	  <script type="text/javascript" src="js/libraries/moment.js"></script> 
 	  <script type="text/javascript" src="js/libraries/livestamp.min.js"></script>
-    <script type="text/javascript" src="js/chat.js" ></script>
+    <script type="text/javascript" src="js/admin_chat.js" ></script>
     <!--templates-->
     <!-- all topics template-->
     <script type="text/template" id="user_chats">
@@ -50,12 +49,14 @@
        </div>
       </li>
      <% } else{ _.each(rc.user_chat, function(list){ %>
-        <li class="table-view-cell media" >
+         <li class="table-view-cell media" >
+            <img class="media-object pull-left" src="img/user.png">
             <div class="media-body">
-              <%=list.msg_content %>
-              <p><span data-livestamp=<%= list.time_stamp %>></span></p>
+              <label class="update"><%=list.username %></label>
+              <p><%=list.msg_content %></p>
+              <p class="time"><span data-livestamp=<%= list.time_stamp %>></span></p>
             </div>
-        </li>
+          </li>
        <% }); } %>
     </script>
   </body>

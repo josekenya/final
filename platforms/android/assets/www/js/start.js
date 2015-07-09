@@ -17,10 +17,12 @@ function onDeviceready()
                   if(result.success)
                   {
                     $(".toast").html(result.success);
+                    //toast.showLong(result.success);
                   }
                   else
                   {
                      $(".toast").html(result.failure);
+                     //toast.showLong(result.failure);
                   }
                 }
               });
@@ -58,6 +60,19 @@ function onDeviceready()
                                   "href":"admin_page.html"
                             });
                              //window.location.href="admin_page.html";
+                            }
+                            else if(result.userid==3)
+                            {
+                             
+                             lStorage=$.sessionStorage;
+                             var data={'username':result.username,'userId':result.userid,'depId':result.depid,'sessionId':result.session_id};
+                             lStorage.set('loginDetails',data);
+                             window.plugins.nativepagetransitions.slide({
+                                  "direction":"left",
+                                  "duration":"400",
+                                  "androiddelay":"20",
+                                  "href":"dep_ministry_page.html"
+                            });
                             }
                             else
                             {
@@ -97,9 +112,24 @@ function onlineCheck() {
     
     toast.showLong('You are connected to a network.');
 }
-function exitapp()
+function showPopUp()
 {
-   navigator.app.exitApp();
+  navigator.notification.confirm(
+        "Do you really want to close this app?", 
+        function(buttonIndex){
+            exitapp(buttonIndex);
+        }, 
+        "Confirmation", 
+        "Yes,No"
+    ); 
+}
+function exitapp(stat)
+{
+   if(stat == "1"){
+        navigator.app.exitApp();
+    }else{
+        return;
+    };
 }
 document.addEventListener('deviceready',function(){
   $(document).ready(function(){
@@ -108,7 +138,7 @@ document.addEventListener('deviceready',function(){
     document.addEventListener('online',onlineCheck,false);
     //exit app
    document.addEventListener("backbutton", function(){ 
-      exitapp();
+      showPopUp();
     }, false);
     //transitions
     $("#next").click(function(){
@@ -116,7 +146,15 @@ document.addEventListener('deviceready',function(){
           "direction":"left",
           "duration":"400",
           "androiddelay":"20",
-          "href":"sign_up.html"
+          "href":"auth_sign_up.html"
+      });
+      });
+    $("#login").click(function(){
+    window.plugins.nativepagetransitions.slide({
+      "direction":"left",
+      "duration":"400",
+      "androiddelay":"20",
+      "href":"auth_log_in.html"
     });
     });
     $("#back").click(function(){
@@ -128,5 +166,5 @@ document.addEventListener('deviceready',function(){
     });
     });
   });
-},false);
+  },false);
 

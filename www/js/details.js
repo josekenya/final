@@ -20,10 +20,10 @@ function init()
      var uid=lStorage.get('loginDetails.userId');
      if(uid==2)
      {
-      PUSH({url:"admin_content.html",transition:"slide-in"});
+      PUSH({url:"admin_page.html",transition:"slide-in"});
       window.location.href='admin_page.html';
     }else{
-      PUSH({url:"main_content.html",transition:"slide-in"});
+      PUSH({url:"user_page.html",transition:"slide-in"});
       window.location.href='user_page.html';
     }
       e.preventDefault();

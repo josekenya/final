@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="msapplication-tap-highlight" content="no" />
+    <title>COUNTY APP</title>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="stylesheet" href="css/ratchet.min.css">
+    <link rel="stylesheet" href="css/ratchet-theme-android.min.css">
+    <link rel="stylesheet" href="css/app.css">
+  </head>
+  <body>
+		<header class="bar bar-nav bar-texture">
+      <a id="back" class="icon icon-left-nav pull-left"></a>
+      <h1 class="title">Discussions</h1>
+		</header>
+	<!--begin main content-->
+		<div class="content ">
+         <ul id="issue_details" class="table-view">
+         </ul>
+		</div><!-- /.content -->
+    <div id="issueComments" class="modal">
+      <header class="bar bar-nav">
+        <a class="icon icon-close pull-right" href="#issueComments"></a>
+        <h1 class="title">Comments</h1>
+      </header>
+      <div class="bar bar-standard bar-header-secondary">
+          <textarea id="my_comment" placeholder="Type Comment" rows="1" required ></textarea>
+          <button class="btn btn-positive pull-right" id="send_comment">send</button>    
+      </div>
+      <div class="content"> 
+        <ul class="table-view" id="issue_comments">
+        </ul>
+      </div>
+</div>  
+    <!-- /.modal -->
+    <script type="text/javascript" src="cordova.js" ></script>
+    <script type="text/javascript" src="js/libraries/ratchet.min.js" ></script>
+    <script type="text/javascript" src="js/libraries/jquery.min.js" ></script>
+    <script type="text/javascript" src="js/libraries/validation.js"></script>
+    <script type="text/javascript" src="js/libraries/underscore-min.js"></script>
+    <script type="text/javascript" src="js/libraries/storageapi.js"></script> 
+	  <script type="text/javascript" src="js/libraries/moment.js"></script> 
+	  <script type="text/javascript" src="js/libraries/livestamp.min.js"></script>
+     <script type="text/javascript" src="js/libraries/fastclick.js" ></script>
+    <script type="text/javascript" src="js/discussion_details.js" ></script>
+    <!--templates-->
+    <!-- all issue detail template-->
+    <script type="text/template" id="issue-detail">     
+          <li class="table-view-cell detail-header">
+           <p class="center-text"><img class="center-image" src="img/header.png"></p>
+           <h4 class="center-text"><%= rc.issue_detail[0].i_title %></h4>
+           <p class="center-text time">@<%= rc.issue_detail[0].dep_name %></p>
+          </li>
+          <li class="table-view-cell"><p><a href="#issueComments" class="btn btn-outlined pull-left"><label id="count"></label> Comment</a></p></li>
+          <li class="table-view-cell">
+             <p><%= rc.issue_detail[0].i_description %></p>
+          </li>
+           
+    </script> 
+    <!-- user comments-->
+    <script type="text/template" id="comments">
+    <% if(rc.failure){ %>
+      <li class="table-view-cell media">
+       <div class="media-body">
+              <p class="center-text"><%= rc.failure %> </p>
+       </div>
+      </li>
+     <% } else{ _.each(rc.comments, function(list){ %>
+        <li class="table-view-cell media" >
+         <img class="media-object pull-left" src="img/person.png">
+            <div class="media-body">
+              <label class="update"><%=list.username %></label>
+              <p><%=list.comment %></p>
+              <p class="time"><span data-livestamp=<%= list.time_stamp %>></span></p>
+            </div>
+        </li>
+       <% }); } %>
+    </script>
+  </body>
+</html>

@@ -23,7 +23,7 @@ a:active {
 }
 
 .content {
-  background-color: #f2f2f2;
+  background-color: #fff;
 }
 
 .bar-nav ~ .content {
@@ -31,7 +31,7 @@ a:active {
 }
 
 .bar-header-secondary ~ .content {
-  padding-top: 100px;
+  padding-top: 120px;
 }
 
 .bar-tab ~ .content {
@@ -311,7 +311,6 @@ a:active {
   background-color: transparent;
 }
 .table-view .table-view-cell {
-  border-bottom: 1px solid #d9d9d9;
 }
 .table-view .table-view-cell:last-child {
   background-image: none;
@@ -485,8 +484,8 @@ textarea,
 }
 
 .popover {
-  top: 47px;
-  left: 15px;
+  top: 0px;
+  right: 15px;
   width: 200px;
   margin-left: 0;
   border: 1px solid #9b9b9b;

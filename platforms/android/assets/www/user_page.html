@@ -9,44 +9,46 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <link rel="stylesheet" href="css/ratchet.min.css">
-    <link rel="stylesheet" href="css/ratchet-theme-android.css">
+    <link rel="stylesheet" href="css/ratchet-theme-android.min.css">
     <link rel="stylesheet" href="css/app.css">
   </head>
   <body>
 		<header class="bar bar-nav bar-texture">
-      <a class="icon icon-gear pull-right" href="#navPopover"></a>
+      <a class="icon icon-more-vertical pull-right" href="#navPopover" id="settings"></a>
       <h1 class="title">COUNTY APP</h1>
 		</header>
     <div class="bar bar-standard bar-header-secondary">
-      <!--segmented control-->
-      <div class="segmented-control">
-        <a class="control-item  active" href="#county_updates">
-          County Projects Updates
-        </a>
-        <a class="control-item" href="#chat_governor">
-          Chat With Governor
-        </a>
-      </div>   
+          <div class="segmented-control">
+              <a class="control-item" href="#item1mobile">
+               Ministries
+              </a>
+              <a class="control-item active" href="#item2mobile">
+               Projects
+              </a>
+              <a class="control-item" href="#item3mobile">
+               Governor Chat
+              </a>
+          </div>
     </div>
 	<!--begin main content-->
-		<div class="content content-padded">
-			<!--segmented content-->
-			<div class="content-padded">
-      			  <span id="county_updates" class="control-content active">
-      			  	  <ul id="county_stories" class="table-view">
-      		        </ul>
-      			  </span>
-      			  <span id="chat_governor" class="control-content">
-                  <form id="add-item" class="input-group">
-                        <textarea id="my_msg" placeholder="Type Message" required></textarea>     
-                        <button class="btn btn-positive pull-right" id="send_msg">Send</button>
-                  </form>
-                  <br/><br/>
-      			  	  <ul id="governor_chat" class="table-view">
-      		        </ul>      
-      			  </span>
-      </div>
-     
+		<div class="content ">
+          <span id="item1mobile" class="control-content ">
+            <ul id="county_ministries" class="table-view">
+            </ul>
+          </span>
+          <span id="item2mobile" class="control-content active">
+            <ul id="county_stories" class="table-view">
+            </ul>
+          </span>
+          <span id="item3mobile" class="control-content content-padded">
+            <form id="add-item" class="input-group">
+                <textarea id="my_msg" placeholder="Type Message" required></textarea>    
+                <button class="btn btn-positive pull-right" id="send_msg">Send</button>
+            </form>
+            <br/><br/>
+            <ul class="table-view" id="governor_chat">
+            </ul>
+          </span>
 		</div><!-- /.content -->
 		     <!-- Popover -->
         <div id="navPopover" class="popover">
@@ -86,9 +88,29 @@
      <% } else{ _.each(rc.topic, function(list){ %>
         <li class="table-view-cell media" >
           <a class="navigate-right" id=<%= list.topic_id %> >
+            <img class="media-object pull-left" src="img/42x42.png">
             <div class="media-body">
-              <%=list.subject %>
-              <p><span data-livestamp=<%= list.time_stamp %>></span></p>
+              <label class="update"><%=list.subject %></label>
+              <p class="time"><span data-livestamp=<%= list.time_stamp %>></span></p>
+            </div>
+          </a>
+        </li>
+       <% }); } %>
+    </script>
+    <!-- all ministries-->
+    <script type="text/template" id="ministries">
+    <% if(rc.failure){ %>
+      <li class="table-view-cell media">
+       <div class="media-body">
+              <p class="center-text"><%= rc.failure %> </p>
+       </div>
+      </li>
+     <% } else{ _.each(rc.ministries, function(list){ %>
+        <li class="table-view-cell media" >
+          <a class="navigate-right" id=<%= list.d_id %> >
+            <div class="media-body">
+            <span class="media-object pull-left icon icon-home"></span>
+              <label class="update"><%=list.dep_name %></label>
             </div>
           </a>
         </li>
@@ -97,18 +119,16 @@
      <!-- admin questions template-->
     <script type="text/template" id="admin-topic">
     <% if(rc.t_error){ %>
-      <li class="table-view-cell media">
-       <div class="media-body">
-              <p class="center-text"><%= rc.t_error %> </p>
-       </div>
-      </li>
-     <% } else{ _.each(rc.thread, function(list){ 
-     	%>
-        <li class="table-view-cell media" >
+        <p class="center-text"><%= rc.t_error %> </p>
+     <% } else{ _.each(rc.thread, function(list){ %>
+          <li class="table-view-cell media" >
+            <img class="media-object pull-left" src="img/user.png">
             <div class="media-body">
+              <label class="update"><%=list.username %></label>
               <p><%=list.msg_content %></p>
+              <p class="time"><span data-livestamp=<%= list.time_stamp %>></span></p>
             </div>
-        </li>
+          </li>
        <%}); } %>
     </script>
   </body>
